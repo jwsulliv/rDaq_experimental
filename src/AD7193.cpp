@@ -2,7 +2,7 @@
 
 bool AD7193::init() {
     spi.setDataMode(SPI_MODE3);
-    spi.setClockDivider(SPI_CLOCK_DIV16);
+    spi.setClockDivider(SPI_CLOCK_DIV2);
     spi.begin();
     return true;
 }
@@ -71,17 +71,21 @@ bool AD7193::update() {
     
     driver_args.comm_bits = AD7193_REG_WRITE | AD7193_CONFIG_REG;
     driver_args.write_payload = config_write_payload;
+    delayMicroseconds(5000); 
     AD7193_driver(driver_args);
+    delayMicroseconds(5000);
 
     driver_args.comm_bits = AD7193_REG_WRITE | AD7193_MODE_REG;
     driver_args.write_payload = mode_reg_payload_calib;
     AD7193_driver(driver_args);
+    delayMicroseconds(5000);
 
     driver_args.comm_bits = AD7193_REG_WRITE | AD7193_MODE_REG;
     driver_args.write_payload = mode_reg_payload_cont;
-    AD7193_driver(driver_args); 
+    AD7193_driver(driver_args);
+    delayMicroseconds(5000); 
 
-    driver_args.comm_bits = AD7193_REG_READ | AD7193_DATA_REG | 0b01011000;
+    // driver_args.comm_bits = AD7193_REG_READ | AD7193_DATA_REG | 0b01011000;
 
     int length = channel_readings.size();
 
@@ -89,13 +93,25 @@ bool AD7193::update() {
     uint32_t timeb [length];
     uint8_t statusv [length];
 
-    
     for(int i = 0; i < length; i++){
+        driver_args.comm_bits = AD7193_REG_READ | AD7193_STATUS_REG;
+        while (!(AD7193_driver(driver_args) & 0b10000000)) delayMicroseconds(10);
+
+        driver_args.comm_bits = AD7193_REG_READ | AD7193_DATA_REG | 0b01011000;
         uint32_t result = AD7193_driver(driver_args);
+        delayMicroseconds(1000);
         uint8_t status = (uint8_t)(result & 0x0000007F);
         statusv[i] = status;
         results[i] = result;
     }
+
+    // for (int i = 0; i < 10000; i++) {
+    //     driver_args.comm_bits = AD7193_REG_READ | AD7193_STATUS_REG;
+    //     uint32_t status_reg_val = AD7193_driver(driver_args);
+    //     Serial.print("Status Reg = ");
+    //     Serial.println(status_reg_val & 0b10000000, HEX);
+    //     delayMicroseconds(10);
+    // }
 
     #ifndef FLIGHT_COMPUTER
         delayMicroseconds(1000);
@@ -105,20 +121,22 @@ bool AD7193::update() {
         if(statusv[i]!=8){
             double volts = AD7193_codeToVolts(results[i] >> 8, gain_bits, false);
             channel_readings[statusv[i]] = volts;
-            // Serial.print("statusv[");
-            // Serial.print(i);
-            // Serial.print("] = ");
-            // Serial.print(statusv[i]);
-            // Serial.print("\n");
         }
+        Serial.print("statusv[");
+        Serial.print(i);
+        Serial.print("] = ");
+        Serial.print(statusv[i]);
+        Serial.print("\n");
         Serial.print("results[");
         Serial.print(i);
         Serial.print("] = ");
         Serial.print(results[i],HEX);
         Serial.print("\n");
-        temperature = results[i] >> 8;
+        if (statusv[i] == 8) {
+            temperature = results[i] >> 8;
+        }
     }
-        Serial.print("channel_bits = ");
+        // Serial.print("channel_bits = ");
         Serial.print(channel_bits, HEX);
         Serial.print("\n");
 
@@ -134,12 +152,13 @@ uint32_t AD7193::AD7193_driver(AD7193_driver_arg_t args){
     //ADC enters a low power mode after making a conversion, so we have to wait for it to fully power up before communicating with it to avoid problems...
     
     uint8_t reg_id = args.comm_bits & 0b00111000;
-    if((args.comm_bits & AD7193_REG_READ) && reg_id == AD7193_DATA_REG){
-        while(1){
-            if(digitalRead(drdy_pin) == LOW)
-                break;
-        }
-    }
+    // if((args.comm_bits & AD7193_REG_READ) && reg_id == AD7193_DATA_REG){
+    //     while(1){
+    //         if(digitalRead(drdy_pin) == LOW) {
+    //             break;
+    //         }
+    //     }
+    // }
 
     //TODO WARNING this statement is not thread safe. Make it so when integrating with MINOS
     spi.transfer(args.comm_bits);

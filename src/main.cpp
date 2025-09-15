@@ -22,11 +22,11 @@ void setup()
   
   Serial.begin(9600);
   Adc0.init();
-  Adc0.update();
+  //Adc0.update();
   delayMicroseconds(1);
   
   for (int i = 0; i < 9; i++) {
-    Adc0.update();
+    //Adc0.update();
     delayMicroseconds(1);
     adcChannels[i] = new AdcChannel(i, Adc0); 
     adcChannels[i]->init();
