@@ -1,6 +1,6 @@
 #pragma once
 #include "SPI.h"
-#include <map>
+#include <array>
 
 //Macros relevant to the Communications register... (the first byte transferred to the AD7193 in a transaction will always be written to the Comm register, so it has no unique address)
 //Bits 0, 6, and 7 must always be empty (0). Bit 1 = r/w ; bits 2-4 = register address ; bit 5 = enable continuous read (has an effect for data reg reads only)
@@ -22,12 +22,30 @@
 #define AD7183 POLARITY_BIT 3
 #define AD7193_CHANNEL_SHIFT 0x00000100
 
+#define PGA_GAIN_1 0x0
+#define PGA_GAIN_8 0x03
+#define PGA_GAIN_16 0x04
+#define PGA_GAIN_32 0x05
+#define PGA_GAIN_64 0x06
+#define PGA_GAIN_128 0x07
+
+#define MODE_REG_PAYLOAD_CALIB 0x380060
+#define MODE_REG_PAYLOAD_CONT 0x180001
+#define MODE_REG_PAYLOAD_SINGLE 0x380001
+#define MODE_REG_PAYLOAD_IDLE 0x580001
+#define MODE_REG_PAYLOAD_PWRDWN 0x780001
+
 //Have to include some global variables here that affect the conversion from output code to volts for the AD7193 --
 //change these in the AD7193 functions or hardcode them to something if they're never going to change!!!
 
 //This info appears on sheet 3 of the MoteV5 schematic -- it appears as REFIN1(+)!!
 #define VREF 2.5
 #define AD7193_CODE_EXP_TERM 16777216   //This is 2^24
+
+
+struct ChannelConfig {
+    uint16_t pgaGain;
+};
 
 class AD7193 {
     public:
@@ -36,43 +54,35 @@ class AD7193 {
             spi(adc_spi),
             drdy_pin(drdy),
             differential(false), //maybe make a parameter
-            channel_readings(),
+            channel_readings{},
             pga_gain(1) //ditto
         {};
 
-        bool add_channel(uint8_t channel);
-        double read_channel(uint8_t channel);
-        void set_differential(bool val);
-        void set_pga_gain(uint16_t gain);
-
-
-        uint32_t get_temperature();
         bool init();
-        bool update();
-        uint32_t get_cspin();
+
+        std::array<ChannelConfig, 9> channelConfigs{{
+            {1}, {1}, {1}, {1}, {1}, {1}, {1}, {1}, {1}
+        }};
+        bool configure_channels(const std::array<ChannelConfig, 9>& channelConfigs);
+        const std::array<double, 9>& read_channels() const; 
+        bool update(uint8_t channel);
 
     private:
+        uint32_t cs_pin;
+        SPIClass &spi;
+        uint32_t drdy_pin;
+        bool differential;
+        std::array<double, 9> channel_readings{};
+        uint16_t pga_gain;
+
+
         struct AD7193_driver_arg_t {
             uint8_t comm_bits;
             uint32_t write_payload;
         };
-        
-        struct AD7193_reading_t
-        {
-            uint8_t channel;
-            double result;
-        };
 
-        std::map<uint8_t, double> channel_readings;
         uint32_t temperature = 0;
-        
         uint32_t AD7193_driver(AD7193_driver_arg_t args);
         double AD7193_codeToVolts(uint32_t code, uint16_t currentGainSetting, bool unipolar);
-
-        uint32_t cs_pin;
-        uint32_t drdy_pin;
-        SPIClass &spi;
-        bool differential;
-        uint16_t pga_gain;
         uint32_t channel_bits = 0x0;
 };
