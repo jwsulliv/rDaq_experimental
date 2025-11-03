@@ -1,49 +1,75 @@
-#include "AD7193.h"
+#include "realAD7193.h"
 
 bool AD7193::init() {
     spi.setDataMode(SPI_MODE3);
     spi.setClockDivider(SPI_CLOCK_DIV16);
     spi.begin();
     return true;
+    pinMode(cs_pin,OUTPUT);
 }
 
-uint32_t AD7193::get_cspin() {
-    return cs_pin;
-}
 
-bool AD7193::add_channel(uint8_t channel){
-    // Add the new channel to the map
-    channel_readings[channel] = 0.0f;
-    channel_bits |= (1 << channel) << 8;
+bool AD7193::configure_channels(const std::array<ChannelConfig, 9>& channelConfigs){
+        AD7193_driver_arg_t driver_args;
 
-    // configure the adc to poll the new channel at regular intervals
-    // return success or fail based on configuration status
+	uint16_t gain_bits;
+    switch(pga_gain){
+        case 1:     gain_bits = 0x0;    break;
+        case 8:     gain_bits = 0x03;   break;
+        case 16:    gain_bits = 0x04;   break;
+        case 32:    gain_bits = 0x05;   break;
+        case 64:    gain_bits = 0x06;   break;
+        case 128:   gain_bits = 0x07;   break;
+        default:    gain_bits = 0x0;
+    }
+    uint32_t config_write_payload = 0x0 | (!differential << AD7193_DIFFERENTIAL_BIT) | channel_bits | (gain_bits);
+    uint32_t mode_reg_payload_calib = 0x080060 | (1 << 20) | (0b001 << 21); // calibrates adc, should be done on startup
+    uint32_t mode_reg_payload_cont = 0x180001; // continuous read mode
+    uint32_t mode_reg_payload_single = 0x200001; // single read mode
+    uint32_t mode_reg_payload_idle = 0x580001; // idle
+    uint32_t mode_reg_payload_pwrdwn = 0x780001; // pwrdwn
+
+    pinMode(cs_pin,OUTPUT);
+  
+    digitalWrite(cs_pin, LOW);
+
+    for(int i = 0; i < 9; i++){
+        switch(channelConfigs[i].pgaGain){
+            case 1:     gain_bits = 0x0;    break;
+            case 8:     gain_bits = 0x03;   break;
+            case 16:    gain_bits = 0x04;   break;
+            case 32:    gain_bits = 0x05;   break;
+            case 64:    gain_bits = 0x06;   break;
+            case 128:   gain_bits = 0x07;   break;
+            default:    gain_bits = 0x0;
+        }
+        uint32_t config_write_payload = 0x0 | (!differential << AD7193_DIFFERENTIAL_BIT) | channel_bits | (gain_bits);
+        driver_args.comm_bits = AD7193_REG_WRITE | AD7193_CONFIG_REG;
+        driver_args.write_payload = config_write_payload;
+        AD7193_driver(driver_args);
+    }
+    
+
+    driver_args.comm_bits = AD7193_REG_WRITE | AD7193_MODE_REG;
+    driver_args.write_payload = mode_reg_payload_calib;
+    AD7193_driver(driver_args);
+
+    driver_args.comm_bits = AD7193_REG_WRITE | AD7193_MODE_REG;
+    driver_args.write_payload = mode_reg_payload_cont;
+    AD7193_driver(driver_args); 
+    
+    
+    
+    
+    
+    
     return true;
 }
 
-double AD7193::read_channel(uint8_t channel) {
-    // return an integer number of mV. Might want to move this conversion elsewhere
 
-    return channel_readings[channel];
-}
-
-uint32_t AD7193::get_temperature() {
-    return (temperature - 0x800000)/ 2815;
-}
-
-void AD7193::set_differential(bool val) {
-    differential = val;
-}
-
-void AD7193::set_pga_gain(uint16_t gain) {
-    pga_gain = gain;
-}
-
-/**
- * Poll the ADCs and update the chached values.
-*/
-bool AD7193::update() {
+bool AD7193::update(uint8_t channel){
     AD7193_driver_arg_t driver_args;
+    if (channel > 8) return false;  // Invalid channel
 
 	uint16_t gain_bits;
     switch(pga_gain){
@@ -97,10 +123,6 @@ bool AD7193::update() {
         results[i] = result;
     }
 
-    #ifndef FLIGHT_COMPUTER
-        delayMicroseconds(1000);
-    #endif
-
     for(int i = 0; i < length; i++){
         if(statusv[i]!=8){
             double volts = AD7193_codeToVolts(results[i] >> 8, gain_bits, false);
@@ -111,21 +133,17 @@ bool AD7193::update() {
             // Serial.print(statusv[i]);
             // Serial.print("\n");
         }
-        Serial.print("results[");
-        Serial.print(i);
-        Serial.print("] = ");
-        Serial.print(results[i],HEX);
-        Serial.print("\n");
         temperature = results[i] >> 8;
     }
-        Serial.print("channel_bits = ");
-        Serial.print(channel_bits, HEX);
-        Serial.print("\n");
 
     digitalWrite(cs_pin, HIGH);
 	return true;
-  
 }
+
+const std::array<double,9>& AD7193::read_channels() const {
+    return channel_readings;
+}
+
 
 uint32_t AD7193::AD7193_driver(AD7193_driver_arg_t args){
     //Basic init stuff -- figure out which SPI bus we're using, then get and set the right pins accordingly...
@@ -185,24 +203,4 @@ uint32_t AD7193::AD7193_driver(AD7193_driver_arg_t args){
     }
     //Deselect device to avoid spurious writes...
     //digitalWrite(cs_pin, HIGH);
-}
-
-double AD7193::AD7193_codeToVolts(uint32_t code, uint16_t currentGainSetting, bool unipolar){
-    int gain = 1;
-
-    switch(currentGainSetting){
-        case 0x00: break;
-        case 0x03: gain = 8; break;
-        case 0x04: gain = 16; break;
-        case 0x05: gain = 32; break;
-        case 0x06: gain = 64; break;
-        case 0x07: gain = 128; break;
-    }
-
-    //These formulas both appear on page 33 of the AD7193 data sheet!!!
-    if(unipolar)        //Evaluates to 'true' if ADC is in unipolar mode! Following is the formula for the unipolar case...
-        return ((double)(code * VREF)) / ((double)(AD7193_CODE_EXP_TERM));
-
-    //If the above conditional statement fails, then the ADC is in bipolar mode! Following is the formula for the bipolar case...
-    return ( ( (double)code / ((double)AD7193_CODE_EXP_TERM / 2) ) - 1 ) / ( (double) 1.0/ (double)VREF );
 }

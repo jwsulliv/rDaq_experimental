@@ -21,6 +21,7 @@ void setup()
   
   
   Serial.begin(9600);
+
   Adc0.init();
   //Adc0.update();
   delayMicroseconds(1);
@@ -50,7 +51,7 @@ void loop()
     int32_t data = channel->get_data();  // Get the data
     Serial.print("Channel ");
     Serial.print(i);
-    Serial.print(": ");
+    Serial.print(" = ");
     Serial.print(data);
     Serial.print("\n");
     i++;

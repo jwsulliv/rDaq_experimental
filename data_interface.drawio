@@ -1,0 +1,147 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.2.5 Chrome/138.0.7204.251 Electron/37.6.1 Safari/537.36" version="28.2.5">
+  <diagram name="Page-1" id="9U08230ohGWkIhE0phmO">
+    <mxGraphModel dx="2038" dy="650" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="2Bm1WA_YdUbl5X3Crlkf-1" value="" style="whiteSpace=wrap;html=1;aspect=fixed;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" vertex="1" parent="1">
+          <mxGeometry x="160" y="250" width="480" height="480" as="geometry" />
+        </mxCell>
+        <mxCell id="2Bm1WA_YdUbl5X3Crlkf-2" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;rDAQ Firmware&lt;/font&gt;" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="180" y="220" width="170" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="2Bm1WA_YdUbl5X3Crlkf-3" value="" style="whiteSpace=wrap;html=1;aspect=fixed;movable=0;resizable=0;rotatable=0;deletable=0;editable=0;locked=1;connectable=0;" vertex="1" parent="1">
+          <mxGeometry x="-530" y="250" width="480" height="480" as="geometry" />
+        </mxCell>
+        <mxCell id="2Bm1WA_YdUbl5X3Crlkf-4" value="&lt;font style=&quot;font-size: 24px;&quot;&gt;Control PC&lt;/font&gt;" style="text;strokeColor=none;align=center;fillColor=none;html=1;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-530" y="220" width="170" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="2Bm1WA_YdUbl5X3Crlkf-5" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-230" y="250" width="180" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="2Bm1WA_YdUbl5X3Crlkf-7" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;ChannelsCmd&lt;/font&gt;&lt;/h1&gt;&lt;p&gt;Pre-defined set of commandable channels from rDAQ firmware.&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;/p&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-230" y="230" width="170" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="2Bm1WA_YdUbl5X3Crlkf-9" value="&lt;i&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;load[1-8].en.cmd&lt;/font&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-140" y="345" width="90" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="2Bm1WA_YdUbl5X3Crlkf-11" value="&lt;i&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;bool&lt;/font&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-230" y="345" width="90" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="2Bm1WA_YdUbl5X3Crlkf-18" value="&lt;i&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;adc[1-8].pga.cmd&lt;/font&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-140" y="370" width="90" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="2Bm1WA_YdUbl5X3Crlkf-19" value="&lt;i&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;enum PGA_GAIN&lt;/font&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-230" y="370" width="90" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="2Bm1WA_YdUbl5X3Crlkf-20" value="&lt;i style=&quot;font-size: 10px;&quot;&gt;fdir.loc_timeout.cmd&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-140" y="395" width="90" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="2Bm1WA_YdUbl5X3Crlkf-21" value="&lt;i&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;uint32_t&lt;/font&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-230" y="395" width="90" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="2Bm1WA_YdUbl5X3Crlkf-27" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="250" width="180" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="2Bm1WA_YdUbl5X3Crlkf-28" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;ChannelsCmd&lt;/font&gt;&lt;/h1&gt;&lt;p&gt;Pre-defined set of commandable channels from rDAQ firmware.&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;/p&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="160" y="230" width="170" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="2Bm1WA_YdUbl5X3Crlkf-29" value="&lt;i&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;load[1-8].en.cmd&lt;/font&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="250" y="345" width="90" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="2Bm1WA_YdUbl5X3Crlkf-30" value="&lt;i&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;bool&lt;/font&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="345" width="90" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="2Bm1WA_YdUbl5X3Crlkf-33" value="&lt;i&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;adc[1-8].pga.cmd&lt;/font&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="250" y="370" width="90" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="2Bm1WA_YdUbl5X3Crlkf-34" value="&lt;i&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;enum PGA_GAIN&lt;/font&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="370" width="90" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="2Bm1WA_YdUbl5X3Crlkf-35" value="&lt;span style=&quot;font-size: 10px;&quot;&gt;&lt;i&gt;fdir.loc_timeout.cmd&lt;/i&gt;&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="250" y="395" width="90" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="2Bm1WA_YdUbl5X3Crlkf-36" value="&lt;i&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;uint32_t&lt;/font&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="395" width="90" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="2Bm1WA_YdUbl5X3Crlkf-38" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="2Bm1WA_YdUbl5X3Crlkf-28">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-50" y="280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2Bm1WA_YdUbl5X3Crlkf-39" value="&lt;font style=&quot;font-size: 8px;&quot;&gt;Initialize &lt;br&gt;(send populated with default values once)&lt;/font&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="2Bm1WA_YdUbl5X3Crlkf-38">
+          <mxGeometry x="0.1561" y="1" relative="1" as="geometry">
+            <mxPoint x="17" y="-21" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2Bm1WA_YdUbl5X3Crlkf-42" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="470" width="180" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="2Bm1WA_YdUbl5X3Crlkf-68" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="2Bm1WA_YdUbl5X3Crlkf-43">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="-50" y="499.9310344827586" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2Bm1WA_YdUbl5X3Crlkf-43" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;TelemetryValues&lt;/font&gt;&lt;/h1&gt;&lt;p&gt;Pre-defined set of telemetered channels from rDAQ firmware.&lt;span style=&quot;background-color: transparent; color: light-dark(rgb(0, 0, 0), rgb(255, 255, 255));&quot;&gt;&amp;nbsp;&lt;/span&gt;&lt;/p&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="160" y="450" width="180" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="2Bm1WA_YdUbl5X3Crlkf-44" value="&lt;i&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;load[1-8].en.fb&lt;/font&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="250" y="550" width="90" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="2Bm1WA_YdUbl5X3Crlkf-45" value="&lt;i&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;bool&lt;/font&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="550" width="90" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="2Bm1WA_YdUbl5X3Crlkf-48" value="&lt;i&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;adc[1-8].pga.fb&lt;/font&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="250" y="575" width="90" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="2Bm1WA_YdUbl5X3Crlkf-49" value="&lt;i&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;enum PGA_GAIN&lt;/font&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="575" width="90" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="2Bm1WA_YdUbl5X3Crlkf-50" value="&lt;i style=&quot;font-size: 10px;&quot;&gt;fdir.loc_timeout.fb&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="250" y="600" width="90" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="2Bm1WA_YdUbl5X3Crlkf-51" value="&lt;i&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;uint32_t&lt;/font&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="600" width="90" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="2Bm1WA_YdUbl5X3Crlkf-53" value="&lt;i&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;adc[1-8].sns&lt;/font&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="250" y="625" width="90" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="2Bm1WA_YdUbl5X3Crlkf-54" value="&lt;i&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;uint32_t&lt;/font&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="625" width="90" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="2Bm1WA_YdUbl5X3Crlkf-55" value="&lt;i&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;load[1-8].i.sns&lt;/font&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="250" y="650" width="90" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="2Bm1WA_YdUbl5X3Crlkf-56" value="&lt;i&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;uint32_t&lt;/font&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="650" width="90" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="2Bm1WA_YdUbl5X3Crlkf-60" value="&lt;span style=&quot;font-size: 10px;&quot;&gt;&lt;i&gt;fw.loop_time&lt;/i&gt;&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="250" y="675" width="90" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="2Bm1WA_YdUbl5X3Crlkf-61" value="&lt;i&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;uint32_t&lt;/font&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="675" width="90" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="2Bm1WA_YdUbl5X3Crlkf-62" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.75;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="1" source="2Bm1WA_YdUbl5X3Crlkf-7" target="2Bm1WA_YdUbl5X3Crlkf-28">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="2Bm1WA_YdUbl5X3Crlkf-64" value="&lt;span style=&quot;font-size: 8px;&quot;&gt;Constantly re-assert commanded state&lt;br&gt;(50Hz?)&lt;/span&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="2Bm1WA_YdUbl5X3Crlkf-62">
+          <mxGeometry x="-0.0416" y="-3" relative="1" as="geometry">
+            <mxPoint y="12" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="2Bm1WA_YdUbl5X3Crlkf-66" value="&lt;span style=&quot;font-size: 10px;&quot;&gt;&lt;i&gt;fw.uptime&lt;/i&gt;&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="250" y="700" width="90" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="2Bm1WA_YdUbl5X3Crlkf-67" value="&lt;i&gt;&lt;font style=&quot;font-size: 10px;&quot;&gt;uint32_t&lt;/font&gt;&lt;/i&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="700" width="90" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="2Bm1WA_YdUbl5X3Crlkf-69" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="-230" y="492.5" width="180" height="190" as="geometry" />
+        </mxCell>
+        <mxCell id="2Bm1WA_YdUbl5X3Crlkf-70" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;&lt;span style=&quot;font-size: 10px;&quot;&gt;Do something with this?&lt;/span&gt;&lt;/h1&gt;&lt;div&gt;&lt;span style=&quot;font-size: 10px;&quot;&gt;No a priori full knowledge of the contents or structure of TelemetryValues, but we want to be able to guess that adc2.sns exists and apply some scaling and units, for example.&amp;nbsp;&amp;nbsp;&lt;/span&gt;&lt;/div&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-230" y="475" width="180" height="135" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
